@@ -1,3 +1,4 @@
+//This script is from jticer4 github for the same project
 window.onload = function () {
 	initShoppingList();
 };
@@ -11,9 +12,10 @@ function initShoppingList() {
 }
 
 function handleItemForm(event, formRef) {
-	if(event.preventDefault){
+	if(event.preventDefault) {
 		event.preventDefault();
 	}
+
 	addItemToShoppingList();
 	formRef.reset();
 
@@ -23,9 +25,9 @@ function handleItemForm(event, formRef) {
 function addItemToShoppingList() {
 	let itemName = document.getElementById("item-name");
 	let itemAmount = document.getElementById("item-amount");
-	let id = getRandomInt(0,10000000);
+	let id = getRandomInt(0, 1000000);
 
-	//Creates list item html and appends to page.
+	// Creates list item html and appends to page.
 	let itemHtml = createListItemHtml(itemName.value, itemAmount.value, id);
 	console.log("Item HTML: ", itemHtml);
 	let itemListRef = document.getElementById("shopping-list");
@@ -34,22 +36,19 @@ function addItemToShoppingList() {
 	setDeleteButtonEvent(id);
 }
 
-function setDeleteButtonEvent (id) {
+function setDeleteButtonEvent(id) {
 	let deleteButton = document.getElementById("button" + id);
 	deleteButton.addEventListener("click", () => {
-	// console.log("DeleteButton Works");
 		removeListItem(id);
 	});
 }
 
-//To create an html element that will append to our page...
 function createListItemHtml(itemName, itemAmount, id) {
 	return `<li id="item${id}">
-		${itemName} - ${itemAmount} 
-		<button id="button${id}" type="button">Delete Item</button>
-		</li>`;
+					${itemName} - ${itemAmount}
+					<button id="button${id}" type="button">Delete Item</button>
+</li>`;
 }
-
 function removeListItem(id) {
 	let listItem = document.getElementById("item" + id);
 	listItem.parentNode.removeChild(listItem);
